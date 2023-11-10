@@ -1,0 +1,38 @@
+spring:
+  cloud:
+    function:
+      definition: salesOrderSimulator
+    stream:
+      binders:
+        #This section of the configuration tells the solace binder how to connect to the solace event broker/mesh
+        solace-broker:
+          type: solace
+          environment:
+            solace:
+              java:
+#                host: tcp://localhost:55554
+#                msgVpn: default
+#                clientUsername: default
+#                clientPassword: default
+
+#                host: tcps://mr-connection-uyu0ef5l9p0.messaging.solace.cloud:55443
+#                msgVpn: hank-uat-broker
+#                clientUsername: solace-cloud-client
+#                clientPassword: o3srlek9ttu7bqmledj1us3jbt
+
+                host: tcps://mr-connection-ndqyaz1q7en.messaging.solace.cloud:55443
+                msgVpn: hank-qa-broker
+                clientUsername: solace-cloud-client
+                clientPassword: bligldmlg29t5hfj33dhp6q7l3
+                connectRetries: 3
+                connectRetriesPerHost: 0
+                reconnectRetries: 3
+      bindings:
+        salesOrderSimulator-out-0:
+          poller:
+            fixed-delay: 10
+          destination: trace/test
+
+
+
+
